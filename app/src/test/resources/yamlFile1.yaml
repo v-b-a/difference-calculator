@@ -1,0 +1,7 @@
+foo: "bar"
+new prop1: "new prop value"
+aboolean: true
+int: 2
+one: "In Treatment"
+fry: [1, 2, 3, 4]
+rar: null
