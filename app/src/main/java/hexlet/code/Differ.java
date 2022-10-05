@@ -42,6 +42,11 @@ public class Differ {
         difference.sort(Comparator.comparing(s -> s.get("key").toString()));
         return Formatter.defineFormat(difference, outputFormat);
     }
+
+    public static String generate(String filepath1, String filepath2) throws Exception {
+        return generate(filepath1, filepath2, "stylish");
+    }
+
     private static Map<String, Object> fillMap(String key, String change, Object singleValue) {
         Map<String, Object> result = new HashMap<>();
         result.put("key", key);

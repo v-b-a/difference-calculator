@@ -83,4 +83,9 @@ public class DifferTest {
         String actual = Differ.generate(absoluteFilePath1, absoluteFilePath2, "json");
         Assertions.assertEquals(DIFF_JSON, actual);
     }
+    @Test
+    public void withoutFormatTest() throws Exception {
+        String actual = Differ.generate(absoluteFilePath1, absoluteFilePath2);
+        Assertions.assertEquals(DIFF_STYLISH, actual);
+    }
 }
