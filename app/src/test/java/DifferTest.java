@@ -48,6 +48,7 @@ public class DifferTest {
             "  + fry: [1, 2, 3, 4, 5]\n" +
             "  - int: 2\n" +
             "    new prop1: new prop value\n" +
+            "  + numbers2: [2, 3, 4, 5]\n" +
             "    one: In Treatment\n" +
             "    rar: null\n" +
             "  + two: The Wire\n" +
