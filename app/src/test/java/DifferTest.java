@@ -1,13 +1,18 @@
 
 import hexlet.code.Differ;
+import org.checkerframework.checker.units.qual.A;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Assertions;
 
 public class DifferTest {
-    private final String absoluteFilePath1 =
+    private final String absoluteFilePathJSON1 =
             "src/test/resources/file1.json";
-    private final String absoluteFilePath2 =
+    private final String absoluteFileJSONPath2 =
             "src/test/resources/file2.json";
+    private final String absoluteFileYAMLPath1 =
+            "src/test/resources/yamlFile1.yaml";
+    private final String absoluteFileYAMLPath2 =
+            "src/test/resources/yamlFile2.yaml";
     private static final String DIFF_STYLISH = """
             {
                 chars1: [a, b, c]
@@ -34,6 +39,19 @@ public class DifferTest {
               - setting3: true
               + setting3: none
             }""";
+
+    private static final String DIFF_STYLISH_2 = "{\n" +
+            "    aboolean: true\n" +
+            "  - foo: bar\n" +
+            "  + foo: bar2\n" +
+            "  - fry: [1, 2, 3, 4]\n" +
+            "  + fry: [1, 2, 3, 4, 5]\n" +
+            "  - int: 2\n" +
+            "    new prop1: new prop value\n" +
+            "    one: In Treatment\n" +
+            "    rar: null\n" +
+            "  + two: The Wire\n" +
+            "}";
     private static final String DIFF_PLAIN = """
             Property 'chars2' was updated. From [complex value] to false
             Property 'checked' was updated. From false to true
@@ -51,41 +69,48 @@ public class DifferTest {
 
     private static final String DIFF_JSON =
             "[{\"change\":\"UNCHANGED\",\"singleValue\":[\"a\",\"b\",\"c\"],\"key\":\"chars1\"},"
-            + "{\"newValue\":false,\"change\":\"CHANGE\",\"oldValue\":[\"d\",\"e\",\"f\"],\"key\":\"chars2\"},"
-            + "{\"newValue\":true,\"change\":\"CHANGE\",\"oldValue\":false,\"key\":\"checked\"},"
-            + "{\"newValue\":[\"value1\",\"value2\"],\"change\":\"CHANGE\",\"oldValue\":null,\"key\":\"default\"},"
-            + "{\"newValue\":null,\"change\":\"CHANGE\",\"oldValue\":45,\"key\":\"id\"},"
-            + "{\"change\":\"DELETE\",\"singleValue\":\"value1\",\"key\":\"key1\"},"
-            + "{\"change\":\"ADD\",\"singleValue\":\"value2\",\"key\":\"key2\"},"
-            + "{\"change\":\"UNCHANGED\",\"singleValue\":[1,2,3,4],\"key\":\"numbers1\"},"
-            + "{\"newValue\":[22,33,44,55],\"change\":\"CHANGE\",\"oldValue\":[2,3,4,5],\"key\":\"numbers2\"},"
-            + "{\"change\":\"DELETE\",\"singleValue\":[3,4,5],\"key\":\"numbers3\"},"
-            + "{\"change\":\"ADD\",\"singleValue\":[4,5,6],\"key\":\"numbers4\"},"
-            + "{\"change\":\"ADD\",\"singleValue\":{\"nestedKey\":\"value\",\"isNested\":true},\"key\":\"obj1\"},"
-            + "{\"newValue\":\"Another value\",\"change\":\"CHANGE\",\"oldValue\":\"Some value\",\"key\":\"setting1\"},"
-            + "{\"newValue\":300,\"change\":\"CHANGE\",\"oldValue\":200,\"key\":\"setting2\"},"
-            + "{\"newValue\":\"none\",\"change\":\"CHANGE\",\"oldValue\":true,\"key\":\"setting3\"}]";
+                    + "{\"newValue\":false,\"change\":\"CHANGE\",\"oldValue\":[\"d\",\"e\",\"f\"],\"key\":\"chars2\"},"
+                    + "{\"newValue\":true,\"change\":\"CHANGE\",\"oldValue\":false,\"key\":\"checked\"},"
+                    + "{\"newValue\":[\"value1\",\"value2\"],\"change\":\"CHANGE\",\"oldValue\":null,\"key\":\"default\"},"
+                    + "{\"newValue\":null,\"change\":\"CHANGE\",\"oldValue\":45,\"key\":\"id\"},"
+                    + "{\"change\":\"DELETE\",\"singleValue\":\"value1\",\"key\":\"key1\"},"
+                    + "{\"change\":\"ADD\",\"singleValue\":\"value2\",\"key\":\"key2\"},"
+                    + "{\"change\":\"UNCHANGED\",\"singleValue\":[1,2,3,4],\"key\":\"numbers1\"},"
+                    + "{\"newValue\":[22,33,44,55],\"change\":\"CHANGE\",\"oldValue\":[2,3,4,5],\"key\":\"numbers2\"},"
+                    + "{\"change\":\"DELETE\",\"singleValue\":[3,4,5],\"key\":\"numbers3\"},"
+                    + "{\"change\":\"ADD\",\"singleValue\":[4,5,6],\"key\":\"numbers4\"},"
+                    + "{\"change\":\"ADD\",\"singleValue\":{\"nestedKey\":\"value\",\"isNested\":true},\"key\":\"obj1\"},"
+                    + "{\"newValue\":\"Another value\",\"change\":\"CHANGE\",\"oldValue\":\"Some value\",\"key\":\"setting1\"},"
+                    + "{\"newValue\":300,\"change\":\"CHANGE\",\"oldValue\":200,\"key\":\"setting2\"},"
+                    + "{\"newValue\":\"none\",\"change\":\"CHANGE\",\"oldValue\":true,\"key\":\"setting3\"}]";
 
     @Test
     public void stylishFormatTest() throws Exception {
-        String actual = Differ.generate(absoluteFilePath1, absoluteFilePath2, "stylish");
+        String actual = Differ.generate(absoluteFilePathJSON1, absoluteFileJSONPath2, "stylish");
         Assertions.assertEquals(DIFF_STYLISH, actual);
     }
 
     @Test
     public void plainFormatTest() throws Exception {
-        String actual = Differ.generate(absoluteFilePath1, absoluteFilePath2, "plain");
+        String actual = Differ.generate(absoluteFilePathJSON1, absoluteFileJSONPath2, "plain");
         Assertions.assertEquals(DIFF_PLAIN, actual);
     }
 
     @Test
     public void jsonFormatTest() throws Exception {
-        String actual = Differ.generate(absoluteFilePath1, absoluteFilePath2, "json");
+        String actual = Differ.generate(absoluteFilePathJSON1, absoluteFileJSONPath2, "json");
         Assertions.assertEquals(DIFF_JSON, actual);
     }
+
     @Test
     public void withoutFormatTest() throws Exception {
-        String actual = Differ.generate(absoluteFilePath1, absoluteFilePath2);
+        String actual = Differ.generate(absoluteFilePathJSON1, absoluteFileJSONPath2);
         Assertions.assertEquals(DIFF_STYLISH, actual);
+    }
+
+    @Test
+    public void diffYAMLinJSONFormat() throws Exception {
+        String actual = Differ.generate(absoluteFileYAMLPath1, absoluteFileYAMLPath2);
+        Assertions.assertEquals(DIFF_STYLISH_2, actual);
     }
 }
