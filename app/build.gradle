@@ -32,6 +32,10 @@ dependencies {
 test {
     useJUnitPlatform()
 }
+tasks.withType(Test) {
+    useJUnitPlatform()
+}
+
 application {
     mainClass = 'hexlet.code.App'
 }
