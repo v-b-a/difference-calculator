@@ -1,8 +1,0 @@
-foo: "bar2"
-new prop1: "new prop value"
-aboolean: true
-one: "In Treatment"
-two: "The Wire"
-fry: [1, 2, 3, 4, 5]
-numbers2: [2, 3, 4, 5]
-rar: null
