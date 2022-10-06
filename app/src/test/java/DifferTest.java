@@ -39,8 +39,8 @@ public class DifferTest {
               + setting3: none
             }""";
 
-    private static final String DIFF_STYLISH_2 = "{\n" +
-            "    chars1: [a, b, c]\n"
+    private static final String DIFF_STYLISH_2 = "{\n"
+            + "    chars1: [a, b, c]\n"
             + "  - chars2: [d, e, f]\n"
             + "  + chars2: false\n"
             + "  - checked: false\n"
