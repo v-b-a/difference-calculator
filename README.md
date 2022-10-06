@@ -1,6 +1,6 @@
 ### Hexlet tests and linter status:
 [![Actions Status](https://github.com/v-b-a/java-project-71/workflows/hexlet-check/badge.svg)](https://github.com/v-b-a/java-project-71/actions)  
-[![Actions Status](https://github.com/v-b-a/java-project-71/actions/workflows/github-actions.yml/badge.svg)](https://github.com/v-b-a/java-project-71/actions)  
+[![Actions Status](https://github.com/v-b-a/java-project-71/actions/workflows/main.yml/badge.svg)](https://github.com/v-b-a/java-project-71/actions)  
 [![Maintainability](https://api.codeclimate.com/v1/badges/14a907854f627d6b638c/maintainability)](https://codeclimate.com/github/v-b-a/java-project-71/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/14a907854f627d6b638c/test_coverage)](https://codeclimate.com/github/v-b-a/java-project-71/test_coverage)
 ## JSON difference
