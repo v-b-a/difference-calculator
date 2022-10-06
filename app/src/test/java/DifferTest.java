@@ -1,6 +1,5 @@
 
 import hexlet.code.Differ;
-import org.checkerframework.checker.units.qual.A;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Assertions;
 
@@ -41,30 +40,30 @@ public class DifferTest {
             }""";
 
     private static final String DIFF_STYLISH_2 = "{\n" +
-            "    chars1: [a, b, c]\n" +
-            "  - chars2: [d, e, f]\n" +
-            "  + chars2: false\n" +
-            "  - checked: false\n" +
-            "  + checked: true\n" +
-            "  - default: null\n" +
-            "  + default: [value1, value2]\n" +
-            "  - id: 45\n" +
-            "  + id: null\n" +
-            "  - key1: value1\n" +
-            "  + key2: value2\n" +
-            "    numbers1: [1, 2, 3, 4]\n" +
-            "  - numbers2: [2, 3, 4, 5]\n" +
-            "  + numbers2: [22, 33, 44, 55]\n" +
-            "  - numbers3: [3, 4, 5]\n" +
-            "  + numbers4: [4, 5, 6]\n" +
-            "  + obj1: {nestedKey=value, isNested=true}\n" +
-            "  - setting1: Some value\n" +
-            "  + setting1: Another value\n" +
-            "  - setting2: 200\n" +
-            "  + setting2: 300\n" +
-            "  - setting3: true\n" +
-            "  + setting3: none\n" +
-            "}";
+            "    chars1: [a, b, c]\n"
+            + "  - chars2: [d, e, f]\n"
+            + "  + chars2: false\n"
+            + "  - checked: false\n"
+            + "  + checked: true\n"
+            + "  - default: null\n"
+            + "  + default: [value1, value2]\n"
+            + "  - id: 45\n"
+            + "  + id: null\n"
+            + "  - key1: value1\n"
+            + "  + key2: value2\n"
+            + "    numbers1: [1, 2, 3, 4]\n"
+            + "  - numbers2: [2, 3, 4, 5]\n"
+            + "  + numbers2: [22, 33, 44, 55]\n"
+            + "  - numbers3: [3, 4, 5]\n"
+            + "  + numbers4: [4, 5, 6]\n"
+            + "  + obj1: {nestedKey=value, isNested=true}\n"
+            + "  - setting1: Some value\n"
+            + "  + setting1: Another value\n"
+            + "  - setting2: 200\n"
+            + "  + setting2: 300\n"
+            + "  - setting3: true\n"
+            + "  + setting3: none\n"
+            + "}";
     private static final String DIFF_PLAIN = """
             Property 'chars2' was updated. From [complex value] to false
             Property 'checked' was updated. From false to true
@@ -82,9 +81,11 @@ public class DifferTest {
 
     private static final String DIFF_JSON =
             "[{\"change\":\"UNCHANGED\",\"singleValue\":[\"a\",\"b\",\"c\"],\"key\":\"chars1\"},"
-                    + "{\"newValue\":false,\"change\":\"CHANGE\",\"oldValue\":[\"d\",\"e\",\"f\"],\"key\":\"chars2\"},"
+                    + "{\"newValue\":false,\"change\":\"CHANGE\",\"oldValue\":[\"d\",\"e\",\"f\"],"
+                    + "\"key\":\"chars2\"},"
                     + "{\"newValue\":true,\"change\":\"CHANGE\",\"oldValue\":false,\"key\":\"checked\"},"
-                    + "{\"newValue\":[\"value1\",\"value2\"],\"change\":\"CHANGE\",\"oldValue\":null,\"key\":\"default\"},"
+                    + "{\"newValue\":[\"value1\",\"value2\"],\"change\":\"CHANGE\","
+                    + "\"oldValue\":null,\"key\":\"default\"},"
                     + "{\"newValue\":null,\"change\":\"CHANGE\",\"oldValue\":45,\"key\":\"id\"},"
                     + "{\"change\":\"DELETE\",\"singleValue\":\"value1\",\"key\":\"key1\"},"
                     + "{\"change\":\"ADD\",\"singleValue\":\"value2\",\"key\":\"key2\"},"
@@ -92,8 +93,10 @@ public class DifferTest {
                     + "{\"newValue\":[22,33,44,55],\"change\":\"CHANGE\",\"oldValue\":[2,3,4,5],\"key\":\"numbers2\"},"
                     + "{\"change\":\"DELETE\",\"singleValue\":[3,4,5],\"key\":\"numbers3\"},"
                     + "{\"change\":\"ADD\",\"singleValue\":[4,5,6],\"key\":\"numbers4\"},"
-                    + "{\"change\":\"ADD\",\"singleValue\":{\"nestedKey\":\"value\",\"isNested\":true},\"key\":\"obj1\"},"
-                    + "{\"newValue\":\"Another value\",\"change\":\"CHANGE\",\"oldValue\":\"Some value\",\"key\":\"setting1\"},"
+                    + "{\"change\":\"ADD\",\"singleValue\":{\"nestedKey\":\"value\",\"isNested\":true},"
+                    + "\"key\":\"obj1\"},"
+                    + "{\"newValue\":\"Another value\",\"change\":\"CHANGE\",\"oldValue\":\"Some value\","
+                    + "\"key\":\"setting1\"},"
                     + "{\"newValue\":300,\"change\":\"CHANGE\",\"oldValue\":200,\"key\":\"setting2\"},"
                     + "{\"newValue\":\"none\",\"change\":\"CHANGE\",\"oldValue\":true,\"key\":\"setting3\"}]";
 
