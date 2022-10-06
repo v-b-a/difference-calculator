@@ -11,7 +11,7 @@ public class DifferTest {
     private final String absoluteFileYAMLPath1 =
             "src/test/resources/fixtures/yamlFile1.yaml";
     private final String absoluteFileYAMLPath2 =
-            "src/test/resources/fixtures/yamlFile1.yaml";
+            "src/test/resources/fixtures/yamlFile2.yaml";
     private static final String DIFF_STYLISH = """
             {
                 chars1: [a, b, c]

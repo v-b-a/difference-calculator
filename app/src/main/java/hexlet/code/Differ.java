@@ -1,7 +1,6 @@
 package hexlet.code;
 
 import hexlet.code.formatters.Formatter;
-
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -12,8 +11,8 @@ import java.util.Objects;
 
 public class Differ {
     public static String generate(String filepath1, String filepath2, String outputFormat) throws Exception {
-        Map<String, Object> map1 = hexlet.code.Parser.parsing(filepath1);
-        Map<String, Object> map2 = hexlet.code.Parser.parsing(filepath2);
+        Map<String, Object> map1 = Parser.parsing(filepath1);
+        Map<String, Object> map2 = Parser.parsing(filepath2);
 
         List<Map<String, Object>> difference = new ArrayList<>();
         for (Map.Entry<String, Object> i : map1.entrySet()) {
@@ -44,7 +43,8 @@ public class Differ {
     }
 
     public static String generate(String filepath1, String filepath2) throws Exception {
-        return generate(filepath1, filepath2, "stylish");
+        String test = generate(filepath1, filepath2, "stylish");
+        return test;
     }
 
     private static Map<String, Object> fillMap(String key, String change, Object singleValue) {
