@@ -40,15 +40,15 @@ public class ParserTest {
     @BeforeAll
     static void yamlData() {
         YAML_MAP.put("setting1", "Some value");
-        YAML_MAP.put("setting2", 200);
+        YAML_MAP.put("setting2", VALUE1);
         YAML_MAP.put("setting3", true);
         YAML_MAP.put("key1", "value1");
-        YAML_MAP.put("numbers1", Arrays.toString(new int[]{1, 2, 3, 4}));
-        YAML_MAP.put("numbers2", Arrays.toString(new int[]{2, 3, 4, 5}));
-        YAML_MAP.put("id", 45);
+        YAML_MAP.put("numbers1", Arrays.toString(new int[]{VALUE2, VALUE3, VALUE4, VALUE5}));
+        YAML_MAP.put("numbers2", Arrays.toString(new int[]{VALUE3, VALUE4, VALUE5, VALUE6}));
+        YAML_MAP.put("id", VALUE7);
         YAML_MAP.put("default", null);
         YAML_MAP.put("checked", false);
-        YAML_MAP.put("numbers3", Arrays.toString(new int[]{3, 4, 5}));
+        YAML_MAP.put("numbers3", Arrays.toString(new int[]{VALUE4, VALUE5, VALUE6}));
         YAML_MAP.put("chars1", Arrays.toString(new String[]{"a", "b", "c"}));
         YAML_MAP.put("chars2", Arrays.toString(new String[]{"d", "e", "f"}));
     }
