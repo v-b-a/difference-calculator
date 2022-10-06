@@ -39,13 +39,18 @@ public class ParserTest {
 
     @BeforeAll
     static void yamlData() {
-        YAML_MAP.put("foo", "bar");
-        YAML_MAP.put("new prop1", "new prop value");
-        YAML_MAP.put("aboolean", true);
-        YAML_MAP.put("int", VALUE3);
-        YAML_MAP.put("one", "In Treatment");
-        YAML_MAP.put("fry", Arrays.toString(new int[]{VALUE2, VALUE3, VALUE4, VALUE5}));
-        YAML_MAP.put("rar", null);
+        YAML_MAP.put("setting1", "Some value");
+        YAML_MAP.put("setting2", 200);
+        YAML_MAP.put("setting3", true);
+        YAML_MAP.put("key1", "value1");
+        YAML_MAP.put("numbers1", Arrays.toString(new int[]{1, 2, 3, 4}));
+        YAML_MAP.put("numbers2", Arrays.toString(new int[]{2, 3, 4, 5}));
+        YAML_MAP.put("id", 45);
+        YAML_MAP.put("default", null);
+        YAML_MAP.put("checked", false);
+        YAML_MAP.put("numbers3", Arrays.toString(new int[]{3, 4, 5}));
+        YAML_MAP.put("chars1", Arrays.toString(new String[]{"a", "b", "c"}));
+        YAML_MAP.put("chars2", Arrays.toString(new String[]{"d", "e", "f"}));
     }
 
     @Test
@@ -54,9 +59,10 @@ public class ParserTest {
         Map<String, Object> actual = Parser.parsing(relativeFilePath1);
         Assertions.assertEquals(JSON_MAP.toString(), actual.toString());
     }
+
     @Test
     void parseYAMLFile() throws IOException {
-        String relativeYAMLFilePath1 = "src/test/resources/yamlFile1.yaml";
+        String relativeYAMLFilePath1 = "src/test/resources/fixtures/yamlFile1.yaml";
         Map<String, Object> actual = Parser.parsing(relativeYAMLFilePath1);
         Assertions.assertEquals(YAML_MAP.toString(), actual.toString());
     }
