@@ -4,7 +4,6 @@ import picocli.CommandLine;
 import picocli.CommandLine.Command;
 import picocli.CommandLine.Option;
 import picocli.CommandLine.Parameters;
-import hexlet.code.Differ;
 
 import java.io.IOException;
 import java.util.concurrent.Callable;
@@ -26,7 +25,7 @@ class App implements Callable<Integer> {
 
     @Override
     public Integer call() throws Exception {
-        String filesDifference = Differ.generate(filepath1, filepath2, format);
+        String filesDifference = hexlet.code.Differ.generate(filepath1, filepath2, format);
         System.out.println(filesDifference);
         return 0;
     }
