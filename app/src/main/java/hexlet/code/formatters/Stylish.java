@@ -29,6 +29,6 @@ public class Stylish {
         return builder.toString();
     }
     private static String fillLine(String changeSign, String key, Object anyValue) {
-        return "  " + changeSign + " " + key + ": " + anyValue + "\n";
+        return String.format("  %s %s: %s\n", changeSign, key, anyValue);
     }
 }

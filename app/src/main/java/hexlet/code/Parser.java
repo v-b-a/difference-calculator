@@ -32,8 +32,9 @@ public class Parser {
 
     private static String getFileExtension(File file) {
         String fileName = file.getName();
-        if (fileName.lastIndexOf(".") != -1 && fileName.lastIndexOf(".") != 0) {
-            return fileName.substring(fileName.lastIndexOf(".") + 1);
+        int index = fileName.lastIndexOf(".");
+        if (index != -1 && index != 0) {
+            return fileName.substring(index + 1);
         } else {
             return "";
         }

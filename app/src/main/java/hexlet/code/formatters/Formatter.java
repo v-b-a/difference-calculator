@@ -8,12 +8,13 @@ import java.util.Map;
 public class Formatter {
     public static String defineFormat(List<Map<String, Object>> diffList, String format)
             throws JsonProcessingException {
-        if (format.equalsIgnoreCase("stylish")) {
-            return Stylish.format(diffList);
-        } else if (format.equalsIgnoreCase("plain")) {
-            return Plain.format(diffList);
-        } else if (format.equalsIgnoreCase("json")) {
-            return Json.format(diffList);
+        switch (format) {
+            case ("stylish"):
+                return Stylish.format(diffList);
+            case ("plain"):
+                return Plain.format(diffList);
+            case ("json"):
+                return Json.format(diffList);
         }
         throw new Error("Unknown format: " + format);
     }
