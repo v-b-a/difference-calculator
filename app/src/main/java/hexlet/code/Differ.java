@@ -11,7 +11,8 @@ import static hexlet.code.Tree.mapCompare;
 
 
 public class Differ {
-    public static String generate(String filepathString1, String filepathString2, String outputFormat) throws Exception {
+    public static String generate(String filepathString1, String filepathString2, String outputFormat)
+            throws Exception {
         Path filepath1 = Paths.get(filepathString1).toAbsolutePath().normalize();
         Path filepath2 = Paths.get(filepathString2).toAbsolutePath().normalize();
         String extensionFile1 = getFileExtension(filepath1);

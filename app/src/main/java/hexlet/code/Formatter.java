@@ -11,14 +11,11 @@ import java.util.Map;
 public class Formatter {
     public static String defineFormat(List<Map<String, Object>> diffList, String format)
             throws JsonProcessingException {
-        switch (format) {
-            case ("stylish"):
-                return Stylish.format(diffList);
-            case ("plain"):
-                return Plain.format(diffList);
-            case ("json"):
-                return Json.format(diffList);
-        }
-        throw new Error("Unknown format: " + format);
+        return switch (format) {
+            case ("stylish") -> Stylish.format(diffList);
+            case ("plain") -> Plain.format(diffList);
+            case ("json") -> Json.format(diffList);
+            default -> throw new Error("Unknown format value: " + format);
+        };
     }
 }
