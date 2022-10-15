@@ -1,65 +1,41 @@
 package hexlet.code;
 
-import hexlet.code.formatters.Formatter;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.HashMap;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
+
+
+import static hexlet.code.Formatter.defineFormat;
+import static hexlet.code.Tree.mapCompare;
 
 
 public class Differ {
-    public static String generate(String filepath1, String filepath2, String outputFormat) throws Exception {
-        Map<String, Object> map1 = Parser.parsing(filepath1);
-        Map<String, Object> map2 = Parser.parsing(filepath2);
+    public static String generate(String filepathString1, String filepathString2, String outputFormat) throws Exception {
+        Path filepath1 = Paths.get(filepathString1).toAbsolutePath().normalize();
+        Path filepath2 = Paths.get(filepathString2).toAbsolutePath().normalize();
+        String extensionFile1 = getFileExtension(filepath1);
+        String extensionFile2 = getFileExtension(filepath2);
 
-        List<Map<String, Object>> difference = new ArrayList<>();
-        for (Map.Entry<String, Object> i : map1.entrySet()) {
-            Map<String, Object> currentMap;
-            if (!map2.containsKey(i.getKey())) {
-                currentMap = fillMap(i.getKey(), "DELETE", i.getValue());
-                difference.add(currentMap);
-            }
-            if (map2.containsKey(i.getKey())) {
-                if (Objects.equals(i.getValue(), map2.get(i.getKey()))) {
-                    currentMap = fillMap(i.getKey(), "UNCHANGED", i.getValue());
-                    difference.add(currentMap);
-                } else {
-                    currentMap = fillMap(i.getKey(), "CHANGE", i.getValue(), map2.get(i.getKey()));
-                    difference.add(currentMap);
-                }
-            }
-        }
-        for (Map.Entry<String, Object> i : map2.entrySet()) {
-            Map<String, Object> currentMap;
-            if (!map1.containsKey(i.getKey())) {
-                currentMap = fillMap(i.getKey(), "ADD", i.getValue());
-                difference.add(currentMap);
-            }
-        }
-        difference.sort(Comparator.comparing(s -> s.get("key").toString()));
-        return Formatter.defineFormat(difference, outputFormat);
+        Map<String, Object> map1 = Parser.parsing(filepath1, extensionFile1);
+        Map<String, Object> map2 = Parser.parsing(filepath2, extensionFile2);
+
+        List<Map<String, Object>> mapDifference = mapCompare(map1, map2);
+
+        return defineFormat(mapDifference, outputFormat);
     }
 
     public static String generate(String filepath1, String filepath2) throws Exception {
-        String test = generate(filepath1, filepath2, "stylish");
-        return test;
+        return generate(filepath1, filepath2, "stylish");
     }
 
-    private static Map<String, Object> fillMap(String key, String change, Object singleValue) {
-        Map<String, Object> result = new HashMap<>();
-        result.put("key", key);
-        result.put("change", change);
-        result.put("singleValue", singleValue);
-        return result;
-    }
-    private static Map<String, Object> fillMap(String key, String change, Object oldValue, Object newValue) {
-        Map<String, Object> result = new HashMap<>();
-        result.put("key", key);
-        result.put("change", change);
-        result.put("oldValue", oldValue);
-        result.put("newValue", newValue);
-        return result;
+    public static String getFileExtension(Path filepath) {
+        String fileName = filepath.toFile().getName();
+        int index = fileName.lastIndexOf(".");
+        if (index != -1 && index != 0) {
+            return fileName.substring(index + 1).toLowerCase();
+        } else {
+            return "";
+        }
     }
 }

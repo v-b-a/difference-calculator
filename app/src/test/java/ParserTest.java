@@ -4,6 +4,8 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -55,15 +57,15 @@ public class ParserTest {
 
     @Test
     void parseJSONRelativePath() throws IOException {
-        String relativeFilePath1 = "src/test/resources/file1.json";
-        Map<String, Object> actual = Parser.parsing(relativeFilePath1);
+        Path filePath = Paths.get("src/test/resources/file1.json").toAbsolutePath().normalize();
+        Map<String, Object> actual = Parser.parsing(filePath, "json");
         Assertions.assertEquals(JSON_MAP.toString(), actual.toString());
     }
 
     @Test
     void parseYAMLFile() throws IOException {
-        String relativeYAMLFilePath1 = "src/test/resources/fixtures/yamlFile1.yaml";
-        Map<String, Object> actual = Parser.parsing(relativeYAMLFilePath1);
+        Path filePath = Paths.get("src/test/resources/fixtures/yamlFile1.yaml").toAbsolutePath().normalize();
+        Map<String, Object> actual = Parser.parsing(filePath, "yaml");
         Assertions.assertEquals(YAML_MAP.toString(), actual.toString());
     }
 }
