@@ -56,14 +56,14 @@ public class ParserTest {
     }
 
     @Test
-    void parseJSONRelativePath() throws IOException {
+    void parseJSONRelativePath() throws Exception {
         Path filePath = Paths.get("src/test/resources/file1.json").toAbsolutePath().normalize();
         Map<String, Object> actual = Parser.parsing(filePath, "json");
         Assertions.assertEquals(JSON_MAP.toString(), actual.toString());
     }
 
     @Test
-    void parseYAMLFile() throws IOException {
+    void parseYAMLFile() throws Exception {
         Path filePath = Paths.get("src/test/resources/fixtures/yamlFile1.yaml").toAbsolutePath().normalize();
         Map<String, Object> actual = Parser.parsing(filePath, "yaml");
         Assertions.assertEquals(YAML_MAP.toString(), actual.toString());
