@@ -13,16 +13,19 @@ public class Parser {
     public static Map<String, Object> parsing(Path filepath, String fileExtension) throws Exception {
         String stringFile = Files.readString(filepath);
         Map<String, Object> result;
-        enum extensions {json, yaml, yml}
-        extensions cFileExtension = extensions.valueOf(fileExtension);
+        enum Extensions {json, yaml, yml
+        }
+        Extensions cFileExtension = Extensions.valueOf(fileExtension);
         switch (cFileExtension) {
             case json:
                 ObjectMapper objectMapper = new ObjectMapper();
-                result = objectMapper.readValue(stringFile, new TypeReference<>() {});
+                result = objectMapper.readValue(stringFile, new TypeReference<>() {
+                });
                 break;
             case yml, yaml:
                 objectMapper = new ObjectMapper(new YAMLFactory());
-                result = objectMapper.readValue(stringFile, new TypeReference<>() {});
+                result = objectMapper.readValue(stringFile, new TypeReference<>() {
+                });
                 break;
             default:
                 throw new Exception("Расширения не поддерживаются");
