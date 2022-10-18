@@ -13,7 +13,8 @@ public class Parser {
     public static Map<String, Object> parsing(Path filepath, String fileExtension) throws Exception {
         String stringFile = Files.readString(filepath);
         Map<String, Object> result;
-        enum Extensions {json, yaml, yml
+        enum Extensions {
+            json, yaml, yml
         }
         Extensions cFileExtension = Extensions.valueOf(fileExtension);
         switch (cFileExtension) {
