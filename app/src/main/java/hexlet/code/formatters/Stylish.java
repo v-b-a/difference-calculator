@@ -10,14 +10,14 @@ public class Stylish {
         for (Map<String, Object> listElement : diffList) {
             String key = listElement.get("key").toString();
             String change = listElement.get("change").toString();
-            Object singleValue = listElement.get("singleValue");
+            Object value = listElement.get("value");
             Object oldValue = listElement.get("oldValue");
             Object newValue = listElement.get("newValue");
 
             switch (change) {
-                case "ADD" -> builder.append(fillLine("+", key, singleValue));
-                case "DELETE" -> builder.append(fillLine("-", key, singleValue));
-                case "UNCHANGED" -> builder.append(fillLine(" ", key, singleValue));
+                case "ADD" -> builder.append(fillLine("+", key, value));
+                case "DELETE" -> builder.append(fillLine("-", key, value));
+                case "UNCHANGED" -> builder.append(fillLine(" ", key, value));
                 case "CHANGE" -> {
                     builder.append(fillLine("-", key, oldValue));
                     builder.append(fillLine("+", key, newValue));

@@ -7,10 +7,6 @@ public class DifferTest {
             "src/test/resources/file1.json";
     private final String absoluteFileJSONPath2 =
             "src/test/resources/file2.json";
-    private final String absoluteFileYAMLPath1 =
-            "src/test/resources/fixtures/yamlFile1.yaml";
-    private final String absoluteFileYAMLPath2 =
-            "src/test/resources/fixtures/yamlFile2.yaml";
     private static final String DIFF_STYLISH = """
             {
                 chars1: [a, b, c]
@@ -38,31 +34,32 @@ public class DifferTest {
               + setting3: none
             }""";
 
-    private static final String DIFF_STYLISH_2 = "{\n"
-            + "    chars1: [a, b, c]\n"
-            + "  - chars2: [d, e, f]\n"
-            + "  + chars2: false\n"
-            + "  - checked: false\n"
-            + "  + checked: true\n"
-            + "  - default: null\n"
-            + "  + default: [value1, value2]\n"
-            + "  - id: 45\n"
-            + "  + id: null\n"
-            + "  - key1: value1\n"
-            + "  + key2: value2\n"
-            + "    numbers1: [1, 2, 3, 4]\n"
-            + "  - numbers2: [2, 3, 4, 5]\n"
-            + "  + numbers2: [22, 33, 44, 55]\n"
-            + "  - numbers3: [3, 4, 5]\n"
-            + "  + numbers4: [4, 5, 6]\n"
-            + "  + obj1: {nestedKey=value, isNested=true}\n"
-            + "  - setting1: Some value\n"
-            + "  + setting1: Another value\n"
-            + "  - setting2: 200\n"
-            + "  + setting2: 300\n"
-            + "  - setting3: true\n"
-            + "  + setting3: none\n"
-            + "}";
+    private static final String DIFF_STYLISH_2 = """
+            {
+                chars1: [a, b, c]
+              - chars2: [d, e, f]
+              + chars2: false
+              - checked: false
+              + checked: true
+              - default: null
+              + default: [value1, value2]
+              - id: 45
+              + id: null
+              - key1: value1
+              + key2: value2
+                numbers1: [1, 2, 3, 4]
+              - numbers2: [2, 3, 4, 5]
+              + numbers2: [22, 33, 44, 55]
+              - numbers3: [3, 4, 5]
+              + numbers4: [4, 5, 6]
+              + obj1: {nestedKey=value, isNested=true}
+              - setting1: Some value
+              + setting1: Another value
+              - setting2: 200
+              + setting2: 300
+              - setting3: true
+              + setting3: none
+            }""";
     private static final String DIFF_PLAIN = """
             Property 'chars2' was updated. From [complex value] to false
             Property 'checked' was updated. From false to true
@@ -79,20 +76,20 @@ public class DifferTest {
             Property 'setting3' was updated. From true to 'none'""";
 
     private static final String DIFF_JSON =
-            "[{\"change\":\"UNCHANGED\",\"singleValue\":[\"a\",\"b\",\"c\"],\"key\":\"chars1\"},"
+            "[{\"change\":\"UNCHANGED\",\"value\":[\"a\",\"b\",\"c\"],\"key\":\"chars1\"},"
                     + "{\"newValue\":false,\"change\":\"CHANGE\",\"oldValue\":[\"d\",\"e\",\"f\"],"
                     + "\"key\":\"chars2\"},"
                     + "{\"newValue\":true,\"change\":\"CHANGE\",\"oldValue\":false,\"key\":\"checked\"},"
                     + "{\"newValue\":[\"value1\",\"value2\"],\"change\":\"CHANGE\","
                     + "\"oldValue\":null,\"key\":\"default\"},"
                     + "{\"newValue\":null,\"change\":\"CHANGE\",\"oldValue\":45,\"key\":\"id\"},"
-                    + "{\"change\":\"DELETE\",\"singleValue\":\"value1\",\"key\":\"key1\"},"
-                    + "{\"change\":\"ADD\",\"singleValue\":\"value2\",\"key\":\"key2\"},"
-                    + "{\"change\":\"UNCHANGED\",\"singleValue\":[1,2,3,4],\"key\":\"numbers1\"},"
+                    + "{\"change\":\"DELETE\",\"value\":\"value1\",\"key\":\"key1\"},"
+                    + "{\"change\":\"ADD\",\"value\":\"value2\",\"key\":\"key2\"},"
+                    + "{\"change\":\"UNCHANGED\",\"value\":[1,2,3,4],\"key\":\"numbers1\"},"
                     + "{\"newValue\":[22,33,44,55],\"change\":\"CHANGE\",\"oldValue\":[2,3,4,5],\"key\":\"numbers2\"},"
-                    + "{\"change\":\"DELETE\",\"singleValue\":[3,4,5],\"key\":\"numbers3\"},"
-                    + "{\"change\":\"ADD\",\"singleValue\":[4,5,6],\"key\":\"numbers4\"},"
-                    + "{\"change\":\"ADD\",\"singleValue\":{\"nestedKey\":\"value\",\"isNested\":true},"
+                    + "{\"change\":\"DELETE\",\"value\":[3,4,5],\"key\":\"numbers3\"},"
+                    + "{\"change\":\"ADD\",\"value\":[4,5,6],\"key\":\"numbers4\"},"
+                    + "{\"change\":\"ADD\",\"value\":{\"nestedKey\":\"value\",\"isNested\":true},"
                     + "\"key\":\"obj1\"},"
                     + "{\"newValue\":\"Another value\",\"change\":\"CHANGE\",\"oldValue\":\"Some value\","
                     + "\"key\":\"setting1\"},"
@@ -125,6 +122,8 @@ public class DifferTest {
 
     @Test
     public void diffYAMLinJSONFormat() throws Exception {
+        String absoluteFileYAMLPath1 = "src/test/resources/fixtures/yamlFile1.yaml";
+        String absoluteFileYAMLPath2 = "src/test/resources/fixtures/yamlFile2.yaml";
         String actual = Differ.generate(absoluteFileYAMLPath1, absoluteFileYAMLPath2);
         Assertions.assertEquals(DIFF_STYLISH_2, actual);
     }

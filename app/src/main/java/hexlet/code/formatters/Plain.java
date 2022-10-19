@@ -1,5 +1,6 @@
 package hexlet.code.formatters;
 
+
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -12,9 +13,9 @@ public class Plain {
         for (Map<String, Object> listElement : diffList) {
             String key = listElement.get("key").toString();
             String change = listElement.get("change").toString();
-            Object singleValue = formatValue(listElement.get("singleValue"));
-            Object oldValue = formatValue(listElement.get("oldValue"));
-            Object newValue = formatValue(listElement.get("newValue"));
+            String value = formatValue(listElement.get("value"));
+            String oldValue = formatValue(listElement.get("oldValue"));
+            String newValue = formatValue(listElement.get("newValue"));
 
             if (change.equals("UNCHANGED")) {
                 continue;
@@ -28,7 +29,7 @@ public class Plain {
             String baseLine = "Property '" + key;
             switch (change) {
                 case "ADD" -> builder.append(baseLine)
-                        .append("' was added with value: ").append(singleValue);
+                        .append("' was added with value: ").append(value);
                 case "DELETE" -> builder.append(baseLine).append("' was removed");
                 case "CHANGE" -> builder.append(baseLine).append("' was updated. From ")
                         .append(oldValue).append(" to ").append(newValue);
@@ -38,13 +39,14 @@ public class Plain {
         return builder.toString();
     }
 
-    private static Object formatValue(Object value) {
+    private static String formatValue(Object value) {
         if (value instanceof String) {
-            value = "'" + value + "'";
+            value = String.format("'%s'", value);
         }
         if (value instanceof ArrayList<?> || value instanceof LinkedHashMap<?, ?>) {
             value = "[complex value]";
         }
-        return value;
+
+        return value == null ? null : value.toString();
     }
 }

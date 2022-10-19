@@ -13,8 +13,8 @@ import static hexlet.code.Tree.mapCompare;
 public class Differ {
     public static String generate(String filepathString1, String filepathString2, String outputFormat)
             throws Exception {
-        Path filepath1 = Paths.get(filepathString1).toAbsolutePath().normalize();
-        Path filepath2 = Paths.get(filepathString2).toAbsolutePath().normalize();
+        Path filepath1 = getAbsolutePath(filepathString1);
+        Path filepath2 = getAbsolutePath(filepathString2);
         String extensionFile1 = getFileExtension(filepath1);
         String extensionFile2 = getFileExtension(filepath2);
 
@@ -30,7 +30,7 @@ public class Differ {
         return generate(filepath1, filepath2, "stylish");
     }
 
-    public static String getFileExtension(Path filepath) {
+    private static String getFileExtension(Path filepath) {
         String fileName = filepath.toFile().getName();
         int index = fileName.lastIndexOf(".");
         if (index != -1 && index != 0) {
@@ -38,5 +38,8 @@ public class Differ {
         } else {
             return "";
         }
+    }
+    private static Path getAbsolutePath(String filepathString) {
+        return Paths.get(filepathString).toAbsolutePath().normalize();
     }
 }

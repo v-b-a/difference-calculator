@@ -1,5 +1,6 @@
 package hexlet.code;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
@@ -11,27 +12,28 @@ import java.util.Map;
 
 public class Parser {
     public static Map<String, Object> parsing(Path filepath, String fileExtension) throws Exception {
-        String stringFile = Files.readString(filepath);
-        Map<String, Object> result;
+        String fileContent = Files.readString(filepath);
         enum Extensions {
             json, yaml, yml
         }
         Extensions cFileExtension = Extensions.valueOf(fileExtension);
-        switch (cFileExtension) {
-            case json:
-                ObjectMapper objectMapper = new ObjectMapper();
-                result = objectMapper.readValue(stringFile, new TypeReference<>() {
-                });
-                break;
-            case yml, yaml:
-                objectMapper = new ObjectMapper(new YAMLFactory());
-                result = objectMapper.readValue(stringFile, new TypeReference<>() {
-                });
-                break;
-            default:
-                throw new Exception("Расширения не поддерживаются");
-        }
-        return result;
+        return switch (cFileExtension) {
+            case json -> parsingJSON(fileContent);
+            case yml, yaml -> parsingYAML(fileContent);
+        };
     }
+
+    private static Map<String, Object> parsingJSON(String fileContent) throws JsonProcessingException {
+        ObjectMapper objectMapper = new ObjectMapper();
+        return objectMapper.readValue(fileContent, new TypeReference<>() {
+        });
+    }
+
+    private static Map<String, Object> parsingYAML(String fileContent) throws JsonProcessingException {
+        ObjectMapper objectMapper = new ObjectMapper(new YAMLFactory());
+        return objectMapper.readValue(fileContent, new TypeReference<>() {
+        });
+    }
+
 
 }
