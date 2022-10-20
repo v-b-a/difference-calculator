@@ -16,7 +16,12 @@ public class Parser {
         enum Extensions {
             json, yaml, yml
         }
-        Extensions cFileExtension = Extensions.valueOf(fileExtension);
+        Extensions cFileExtension;
+        try {
+            cFileExtension = Extensions.valueOf(fileExtension);
+        } catch (Exception e) {
+            throw new Exception("Unknown extension: " + fileExtension);
+        }
         return switch (cFileExtension) {
             case json -> parsingJSON(fileContent);
             case yml, yaml -> parsingYAML(fileContent);
