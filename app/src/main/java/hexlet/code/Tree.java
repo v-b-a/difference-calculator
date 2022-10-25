@@ -26,7 +26,7 @@ public class Tree {
                     currentMap = fillMap(key, "UNCHANGED", map1.get(key));
                     difference.add(currentMap);
                 } else {
-                    currentMap = fillMap(key, "CHANGE", map1.get(key), map2.get(key));
+                    currentMap = fillMap(key, map1.get(key), map2.get(key));
                     difference.add(currentMap);
                 }
             }
@@ -47,10 +47,10 @@ public class Tree {
         return result;
     }
 
-    private static Map<String, Object> fillMap(String key, String change, Object oldValue, Object newValue) {
+    private static Map<String, Object> fillMap(String key, Object oldValue, Object newValue) {
         Map<String, Object> result = new HashMap<>();
         result.put("key", key);
-        result.put("change", change);
+        result.put("change", "CHANGE");
         result.put("oldValue", oldValue);
         result.put("newValue", newValue);
         return result;

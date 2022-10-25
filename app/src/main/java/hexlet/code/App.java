@@ -5,7 +5,6 @@ import picocli.CommandLine.Command;
 import picocli.CommandLine.Option;
 import picocli.CommandLine.Parameters;
 
-import java.io.IOException;
 import java.util.concurrent.Callable;
 
 @Command(
@@ -30,7 +29,7 @@ class App implements Callable<Integer> {
         return 0;
     }
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
         int exitCode = new CommandLine(new App()).execute(args);
         System.exit(exitCode);
     }

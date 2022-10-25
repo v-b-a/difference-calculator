@@ -3,6 +3,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
@@ -55,16 +56,20 @@ public class ParserTest {
     }
 
     @Test
-    void parseJSONRelativePath() throws Exception {
-        Path filePath = Paths.get("src/test/resources/file1.json").toAbsolutePath().normalize();
-        Map<String, Object> actual = Parser.parsing(filePath, "json");
+    void parseJsonRelativePath() throws Exception {
+        Path jsonFilePath =
+                Paths.get("src/test/resources/fixtures/file1.json").toAbsolutePath().normalize();
+        String jsonFileContent = Files.readString(jsonFilePath);
+        Map<String, Object> actual = Parser.parsing(jsonFileContent, "json");
         Assertions.assertEquals(JSON_MAP.toString(), actual.toString());
     }
 
     @Test
     void parseYAMLFile() throws Exception {
-        Path filePath = Paths.get("src/test/resources/fixtures/yamlFile1.yaml").toAbsolutePath().normalize();
-        Map<String, Object> actual = Parser.parsing(filePath, "yaml");
+        Path yamlFilePath =
+                Paths.get("src/test/resources/fixtures/file1.json").toAbsolutePath().normalize();
+        String yamlFileContent = Files.readString(yamlFilePath);
+        Map<String, Object> actual = Parser.parsing(yamlFileContent, "yaml");
         Assertions.assertEquals(YAML_MAP.toString(), actual.toString());
     }
 }

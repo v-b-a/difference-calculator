@@ -5,14 +5,12 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.Map;
 
 
 public class Parser {
-    public static Map<String, Object> parsing(Path filepath, String fileExtension) throws Exception {
-        String fileContent = Files.readString(filepath);
+    public static Map<String, Object> parsing(String fileContent, String fileExtension) throws Exception {
+//        String fileContent = Files.readString(filepath);
         enum Extensions {
             json, yaml, yml
         }
