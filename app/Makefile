@@ -18,7 +18,7 @@ test:
 	./gradlew test
 
 report:
-	./gradlew jacocoTestReport
+	./gradlew check
 
 lint:
 	./gradlew checkstyleMain checkstyleTest
