@@ -21,6 +21,7 @@ jobs:
           arguments: build
           build-root-directory: app
       - name: Publish code coverage
+        workingDirectory: app
         uses: paambaati/codeclimate-action@v3.0.0
         env:
           CC_TEST_REPORTER_ID: ${{secrets.CC_TEST_REPORTER_ID}}
