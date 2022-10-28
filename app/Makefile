@@ -3,7 +3,7 @@ run-dist:
 	./build/install/app/bin/app
 
 clean:
-	./app/gradlew clean
+	./gradlew clean
 
 build:
 	./gradlew clean build
@@ -18,7 +18,7 @@ test:
 	./gradlew test
 
 report:
-	./gradlew check
+	./gradlew jacocoTestReport
 
 lint:
 	./gradlew checkstyleMain checkstyleTest
